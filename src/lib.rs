@@ -186,6 +186,14 @@ mod sealed {
 #[cfg(feature = "device-selected")]
 pub(crate) use sealed::Sealed;
 
+#[cfg(feature = "device-selected")]
+#[cfg(feature = "ltdc")]
+pub mod ltdc;
+
+#[cfg(feature = "device-selected")]
+#[cfg(feature = "fmc")]
+pub mod fmc;
+
 fn stripped_type_name<T>() -> &'static str {
     let s = core::any::type_name::<T>();
     let p = s.split("::");

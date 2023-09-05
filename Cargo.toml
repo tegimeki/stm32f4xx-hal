@@ -48,7 +48,9 @@ rtic-monotonic = { version = "1.0", optional = true }
 systick-monotonic = { version = "1.0", optional = true }
 bitflags = "2.2"
 embedded-storage = "0.2"
-
+libm = "0.2.7"
+stm32-fmc = { version = "0.3.0", features = ["sdram"], optional = true }
+    
 [dependencies.time]
 version = "0.3.14"
 default-features = false
@@ -93,6 +95,7 @@ default-features = false
 features = ["macros"]
 
 [features]
+default = ["stm32f469"] # TEST/DEBUG ONLY - don't merge!
 device-selected = []
 rt = [] # deprecated
 # Note: stm32f4 has only one feature for some very similar device families,
@@ -112,7 +115,7 @@ stm32f429 = ["stm32f4/stm32f429", "device-selected", "gpio-f427", "fmc"]
 stm32f437 = ["stm32f4/stm32f427", "device-selected", "gpio-f427", "fsmc", "cryp"]
 stm32f439 = ["stm32f4/stm32f429", "device-selected", "gpio-f427", "fmc", "cryp"]
 stm32f446 = ["stm32f4/stm32f446", "device-selected", "gpio-f446"]
-stm32f469 = ["stm32f4/stm32f469", "device-selected", "gpio-f469"]
+stm32f469 = ["stm32f4/stm32f469", "device-selected", "gpio-f469", "ltdc", "fmc"]
 stm32f479 = ["stm32f4/stm32f469", "device-selected", "gpio-f469", "cryp"]
 
 gpio-f401 = [
@@ -275,7 +278,7 @@ dfsdm1 = ["dfsdm"]
 dfsdm2 = ["dfsdm"]
 dsihost = []
 eth = []
-fmc = []
+fmc = ["stm32-fmc"]
 fsmc = []
 fmpi2c1 = []
 gpiod = []

@@ -332,4 +332,6 @@ bus! {
     TIM12 => (APB1, 6),
     TIM13 => (APB1, 7),
     TIM14 => (APB1, 8),
+    DMA2D => (AHB1, 23),
+    LTDC => (APB2, 26),
 }
