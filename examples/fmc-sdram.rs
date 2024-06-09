@@ -21,14 +21,30 @@ use core::{mem, slice};
 use cortex_m_rt::entry;
 use cortex_m_semihosting::hprintln;
 use stm32_fmc::devices::is42s16400j_7;
+<<<<<<< HEAD
 use stm32f4xx_hal::{fmc::FmcExt, gpio::alt::fmc as alt, pac, prelude::*};
+=======
+use stm32f4xx_hal::{
+    fmc::FmcExt,
+    gpio::{alt::fmc as alt, Speed},
+    pac,
+    prelude::*,
+};
+>>>>>>> c6c1779 (stm32-fmc)
 
 /// Configure pins for the FMC controller
 macro_rules! fmc_pins {
     ($($alt:ident: $pin:expr,)*) => {
         (
             $(
+<<<<<<< HEAD
                 alt::$alt::from($pin.internal_pull_up(true))
+=======
+                alt::$alt::from($pin.into_alternate()
+                    .speed(Speed::VeryHigh)
+                    .internal_pull_up(true)
+                )
+>>>>>>> c6c1779 (stm32-fmc)
             ),*
         )
     };
