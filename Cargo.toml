@@ -38,6 +38,7 @@ synopsys-usb-otg = { version = "0.4.0", features = [
 ], optional = true }
 sdio-host = { version = "0.9.0", optional = true }
 embedded-dma = "0.2.0"
+embedded-display-controller = { version = "^0.2.0", optional = true }
 bare-metal = { version = "1" }
 void = { default-features = false, version = "1.0.2" }
 display-interface = { version = "0.5.0", optional = true }
@@ -56,7 +57,7 @@ embedded-hal-async = { version = "1.0", optional = true }
 rtic = { version = "2.0.1", features = ["thumbv7-backend"], optional = true }
 atomic-polyfill = { version = "1.0.3", optional = true }
 
-stm32-fmc = { version = "0.3.0", optional = true }
+# MF: overriding below stm32-fmc = { version = "0.3.0", optional = true }
 
 enumflags2 = "0.7.8"
 embedded-storage = "0.3"
@@ -69,6 +70,12 @@ micromath = { version = "2.1.0", optional = true }
 package = "stm32f4-staging"
 version = "0.16.0"
 features = ["defmt", "atomics"]
+
+[dependencies.stm32-fmc]
+version = "0.3.0"
+optional = true
+features = ["sdram"]
+path = "../stm32-fmc" # MF: using local repo with support for F469I-DISC part
 
 [dependencies.time]
 version = "0.3.14"
@@ -147,7 +154,7 @@ stm32f429 = ["stm32f4/stm32f429", "gpio-f427", "fmc"]
 stm32f437 = ["stm32f4/stm32f427", "gpio-f427", "fsmc", "cryp"]
 stm32f439 = ["stm32f4/stm32f429", "gpio-f427", "fmc", "cryp"]
 stm32f446 = ["stm32f4/stm32f446", "gpio-f446"]
-stm32f469 = ["stm32f4/stm32f469", "gpio-f469"]
+stm32f469 = ["stm32f4/stm32f469", "gpio-f469", "fmc"]
 stm32f479 = ["stm32f4/stm32f469", "gpio-f469", "cryp"]
 
 gpio-f401 = [
@@ -504,7 +511,7 @@ dcmi = []
 dfsdm1 = ["dfsdm"]
 dfsdm2 = ["dfsdm"]
 dma2d = []
-dsihost = []
+dsihost = ["embedded-display-controller"]
 eth = []
 fmc = []
 fsmc = []
